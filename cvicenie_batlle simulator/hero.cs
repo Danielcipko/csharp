@@ -14,6 +14,10 @@ namespace cvicenie_batlle_simulator
 
         public int DMG { get; set; } = 10;  //Damage
 
+        public int ENG { get; set; } = 100; //Energy
+
+        public int Armor { get; set; } = 15;
+
 
         public int SHD { get; set; } = 15;         //Shield
 
