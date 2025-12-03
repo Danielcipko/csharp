@@ -14,7 +14,7 @@ namespace Cvicenie_GameShop
 
         public override string ToString()
         {
-            return $"{Name} (Hodnota: {Price}, Level: {Level}";
+            return $"{Name} (Hodnota: {Price}, Level: {Level}";                   
         }
     }
 }
