@@ -28,7 +28,7 @@ namespace cvicenie_stringMath
             int g = a + b + c + d + f;
             return g;
             
-
+            
 
 
             
