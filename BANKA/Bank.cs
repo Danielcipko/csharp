@@ -17,9 +17,6 @@ namespace BANKA
 
         public void StartBank()
         {
-            // Pripravenie 2 testovacich uctov
-            zoznamUctov.Add(new Account(noveID++, "Jano Mrkvicka", "heslo123", 550.50M));
-            zoznamUctov.Add(new Account(noveID++, "Maria Novakova", "tajne", 1200.00M));
 
             // Hlavny cyklus
             while (true)
@@ -48,7 +45,7 @@ namespace BANKA
             Console.WriteLine("1. Prihlasenie");
             Console.WriteLine("2. Zalozenie noveho uctu");
             Console.WriteLine("3. Zabudnute heslo (Obnovenie)");
-            Console.WriteLine("4. Zobrazit zoznam vsetkych ID (pre testovanie)");
+            Console.WriteLine("4. Zobrazit zoznam vsetkych ID ");
             Console.WriteLine("5. Ukoncit program");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Zvolte moznost: ");
@@ -185,7 +182,7 @@ namespace BANKA
         static void ZobrazVsetkyID()
         {
             Console.Clear();
-            Console.WriteLine("--- Zoznam vsetkych ID a Mien (LEN PRE TESTOVANIE!) ---");
+            Console.WriteLine("--- Zoznam vsetkych ID a Mien ---");
             if (zoznamUctov.Count == 0)
             {
                 Console.WriteLine("Zatial nebol zalozeny ziaden ucet.");
