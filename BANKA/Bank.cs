@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,41 +7,41 @@ namespace BANKA
 {
     public class Bank
     {
-        // Zoznam v ktorom su ulozene vsetky ucty
+        // zoznam v ktorom su ulozene vsetky ucty
         private static List<Account> zoznamUctov = new List<Account>();
 
-        // Premenna pre ulozenie ID prihlaseneho pouzivatela
+        // premenna pre ulozenie ID prihlaseneho pouzivatela
         private static Account prihlasenyUcet = null;
 
-        // Pocitadlo pre generovanie ID uctov (zaciname napr. od 1000)
+        // pocitadlo pre generovanie ID uctov 
         private static int noveID = 1000;
 
         public void StartBank()
         {
 
-            // Hlavny cyklus
+            // hlavny cyklus
             while (true)
             {
                 if (prihlasenyUcet == null)
                 {
-                    // Uzivatel nie je prihlaseny = zobrazi sa uvodne menu
+                    // uzivatel nie je prihlaseny = zobrazi sa uvodne menu
                     UvodneMenu();
                 }
                 else
                 {
-                    // Uzivatel je prihlaseny = zobrazi sa menu aplikacie
+                    // uzivatel je prihlaseny = zobrazi sa menu aplikacie
                     BankoveMenu();
                 }
             }
         }
 
-        // --- Metody pre Menu a Prihlasovanie ---
+        // metody pre menu a prihlasovanie
 
         static void UvodneMenu()
         {
-            Console.Clear(); // Vymazanie obrazovky
+            Console.Clear(); // vymazanie obrazovky (pomoc CHATGPT)
             Console.WriteLine("=====================================");
-            Console.WriteLine("    Vitajte v Mojom Bankovom Systeme");
+            Console.WriteLine("    Vitajte v R&D Bank");
             Console.WriteLine("=====================================");
             Console.WriteLine("1. Prihlasenie");
             Console.WriteLine("2. Zalozenie noveho uctu");
@@ -67,10 +68,10 @@ namespace BANKA
                     ZobrazVsetkyID();
                     break;
                 case "5":
-                    Environment.Exit(0);
+                    Environment.Exit(0);    // (pomoc CHATGPT)
                     break;
                 default:
-                    Console.WriteLine("\nNeplatna volba. Stlacte Enter pre pokracovanie...");
+                    Console.WriteLine("Neplatna volba. Stlacte Enter pre pokracovanie...");
                     Console.ReadLine();
                     break;
             }
@@ -92,17 +93,17 @@ namespace BANKA
             Console.WriteLine("Zadajte heslo: ");
             string heslo = Console.ReadLine();
 
-            // Hladanie uctu v zozname podla ID
+            // hladanie uctu v zozname podla ID
             Account ucet = zoznamUctov.FirstOrDefault(u => u.ID == idUctu);
 
             if (ucet != null && ucet.Heslo == heslo)
             {
-                prihlasenyUcet = ucet; // Uspesne prihlasenie
-                Console.WriteLine("\nPrihlasenie uspesne! Vitajte, " + ucet.MenoPriezvisko + ".");
+                prihlasenyUcet = ucet; // uspesne prihlasenie
+                Console.WriteLine("Prihlasenie uspesne! Vitajte, " + ucet.MenoPriezvisko + ".");
             }
             else
             {
-                Console.WriteLine("\nChybne ID alebo heslo!");
+                Console.WriteLine("Chybne ID alebo heslo!");
             }
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
             Console.ReadLine();
@@ -120,7 +121,7 @@ namespace BANKA
             string heslo = Console.ReadLine();
 
             Console.WriteLine("Pociatocny vklad (min. 10 EUR): ");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal vklad) || vklad < 10)
+            if (!decimal.TryParse(Console.ReadLine(), out decimal vklad) || vklad < 10)   
             {
                 Console.WriteLine("Neplatny vklad. Musi byt aspon 10 EUR.");
                 Console.WriteLine("Stlacte Enter pre navrat do menu.");
@@ -128,25 +129,25 @@ namespace BANKA
                 return;
             }
 
-            // Vytvorenie noveho uctu a pridelenie ID
+            // vytvorenie noveho uctu a pridelenie ID uzivatelovi
             Account novyUcet = new Account(noveID, meno, heslo, vklad);
             zoznamUctov.Add(novyUcet);
-            noveID++; // Zvysenie pre dalsi ucet
+            noveID++; // zvysenie pre dalsi ucet
 
-            Console.WriteLine($"\nUcet bol uspesne zalozeny!");
+            Console.WriteLine($"Ucet bol uspesne zalozeny!");
             Console.WriteLine($"Vase prihlasovacie ID je: {novyUcet.ID}");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
             Console.ReadLine();
         }
-
+        
         static void ObnovenieHesla()
         {
             Console.Clear();
             Console.WriteLine("--- Zabudnute Heslo (Obnovenie) ---");
 
             Console.WriteLine("Zadajte ID uctu (cislo): ");
-            if (!int.TryParse(Console.ReadLine(), out int idUctu))
+            if (!int.TryParse(Console.ReadLine(), out int idUctu)) 
             {
                 Console.WriteLine("Neplatny format ID. Stlacte Enter.");
                 Console.ReadLine();
@@ -164,11 +165,11 @@ namespace BANKA
                 Console.WriteLine($"Zadajte vase meno a priezvisko ({ucet.MenoPriezvisko}): ");
                 string zadaneMeno = Console.ReadLine();
 
-                if (zadaneMeno.Equals(ucet.MenoPriezvisko, StringComparison.OrdinalIgnoreCase))
+                if (zadaneMeno.Equals(ucet.MenoPriezvisko, StringComparison.OrdinalIgnoreCase)) // pomoc CHATGPT (OrdinalIgnoreCase)
                 {
                     Console.WriteLine("Zadajte nove heslo: ");
                     ucet.Heslo = Console.ReadLine();
-                    Console.WriteLine("\nHeslo bolo uspesne zmenene!");
+                    Console.WriteLine("Heslo bolo uspesne zmenene!");
                 }
                 else
                 {
@@ -199,7 +200,7 @@ namespace BANKA
             Console.ReadLine();
         }
 
-        // --- Metody pre Prihlaseneho Uzivatela ---
+        // metody pre prihlaseneho uzivatela
 
         static void BankoveMenu()
         {
@@ -235,12 +236,12 @@ namespace BANKA
                     ZobrazHistoriu();
                     break;
                 case "5":
-                    prihlasenyUcet = null; // Odhlasenie
-                    Console.WriteLine("\nBoli ste uspesne odhlaseny. Stlacte Enter.");
+                    prihlasenyUcet = null; // odhlasenie
+                    Console.WriteLine("Boli ste uspesne odhlaseny. Stlacte Enter.");
                     Console.ReadLine();
                     break;
                 default:
-                    Console.WriteLine("\nNeplatna volba. Stlacte Enter pre pokracovanie...");
+                    Console.WriteLine("Neplatna volba. Stlacte Enter pre pokracovanie...");
                     Console.ReadLine();
                     break;
             }
@@ -252,16 +253,16 @@ namespace BANKA
             Console.WriteLine("--- Vklad na Ucet ---");
             Console.WriteLine("Zadajte sumu pre vklad: ");
 
-            if (decimal.TryParse(Console.ReadLine(), out decimal suma) && suma > 0)
+            if (decimal.TryParse(Console.ReadLine(), out decimal suma) && suma > 0)    // (decimal sluzi na pracu s desatinymi cislami (co najpresnejsie hodnoty))
             {
                 prihlasenyUcet.Zostatok += suma;
                 prihlasenyUcet.HistoriaPrevodov.Add($"Vklad na ucet: +{suma:N2} EUR ({DateTime.Now.ToShortDateString()})");
-                Console.WriteLine($"\nUspesne vlozenych {suma:N2} EUR.");
+                Console.WriteLine($"Uspesne vlozenych {suma:N2} EUR.");
                 Console.WriteLine($"Novy zostatok: {prihlasenyUcet.Zostatok:N2} EUR.");
             }
             else
             {
-                Console.WriteLine("\nNeplatna suma pre vklad.");
+                Console.WriteLine("Neplatna suma pre vklad.");
             }
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
             Console.ReadLine();
@@ -279,17 +280,17 @@ namespace BANKA
                 {
                     prihlasenyUcet.Zostatok -= suma;
                     prihlasenyUcet.HistoriaPrevodov.Add($"Vyber z uctu: -{suma:N2} EUR ({DateTime.Now.ToShortDateString()})");
-                    Console.WriteLine($"\nUspesne vybranych {suma:N2} EUR.");
+                    Console.WriteLine($"Uspesne vybranych {suma:N2} EUR.");
                     Console.WriteLine($"Novy zostatok: {prihlasenyUcet.Zostatok:N2} EUR.");
                 }
                 else
                 {
-                    Console.WriteLine("\nNedostatocny zostatok na ucte!");
+                    Console.WriteLine("Nedostatocny zostatok na ucte!");
                 }
             }
             else
             {
-                Console.WriteLine("\nNeplatna suma pre vyber.");
+                Console.WriteLine("Neplatna suma pre vyber.");
             }
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
             Console.ReadLine();
@@ -308,7 +309,7 @@ namespace BANKA
                 return;
             }
 
-            // Kontrola, ci uzivatel neprevadza peniaze sebe
+            // ˇkontrola ci uzivatel neprevadza peniaze sebe
             if (prihlasenyUcet.ID == idPrijemcu)
             {
                 Console.WriteLine("Nemozete poslat peniaze sam sebe!");
@@ -317,7 +318,7 @@ namespace BANKA
                 return;
             }
 
-            // Najdenie prijemcu
+            // najdenie prijemcu
             Account prijemca = zoznamUctov.FirstOrDefault(u => u.ID == idPrijemcu);
 
             if (prijemca == null)
@@ -331,25 +332,25 @@ namespace BANKA
                 {
                     if (prihlasenyUcet.Zostatok >= suma)
                     {
-                        // Odpisanie od odosielatela
+                        // odpisanie od odosielatela
                         prihlasenyUcet.Zostatok -= suma;
                         prihlasenyUcet.HistoriaPrevodov.Add($"Odoslany prevod (ID: {prijemca.ID}): -{suma:N2} EUR ({DateTime.Now.ToShortDateString()})");
 
-                        // Pripisanie prijemcovi
+                        // pripisanie prijemcovi
                         prijemca.Zostatok += suma;
                         prijemca.HistoriaPrevodov.Add($"Prijaty prevod (ID: {prihlasenyUcet.ID}): +{suma:N2} EUR ({DateTime.Now.ToShortDateString()})");
 
-                        Console.WriteLine($"\nUspesne prevedenych {suma:N2} EUR na ucet ID: {prijemca.ID}.");
+                        Console.WriteLine($"Uspesne prevedenych {suma:N2} EUR na ucet ID: {prijemca.ID}.");
                         Console.WriteLine($"Novy zostatok: {prihlasenyUcet.Zostatok:N2} EUR.");
                     }
                     else
                     {
-                        Console.WriteLine("\nNedostatocny zostatok na ucte pre prevod!");
+                        Console.WriteLine("Nedostatocny zostatok na ucte pre prevod!");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("\nNeplatna suma pre prevod.");
+                    Console.WriteLine("Neplatna suma pre prevod.");
                 }
             }
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
@@ -370,7 +371,7 @@ namespace BANKA
             }
             else
             {
-                // Zobrazenie transakcii od najnovsej
+                // zobrazenie transakcii od najnovsej
                 foreach (string transakcia in prihlasenyUcet.HistoriaPrevodov.AsEnumerable().Reverse())
                 {
                     Console.WriteLine(transakcia);

@@ -123,7 +123,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvicenie_sims", "cvicenie_s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvicenie_ukladanie", "cvicenie_ukladanie\cvicenie_ukladanie.csproj", "{48756EF8-52E3-4EF0-9F29-D5A4CB344D9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BANKA", "BANKA\BANKA.csproj", "{3B8DEFBB-D157-4D18-890D-F2A92DB3CB4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R&D Bank", "BANKA\R&D Bank.csproj", "{3B8DEFBB-D157-4D18-890D-F2A92DB3CB4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
