@@ -6,13 +6,14 @@ using System.Threading;
 namespace BANKA
 {
 
+
     public class Bank
     {
         private static List<Account> zoznamUctov = new List<Account>();
         private static Account prihlasenyUcet = null;
-        private static int noveID = 1000;
+        private static int noveID = 999-1500;
         private static bool programBezi = true;
-
+        private static string heslo;
         public void StartBank()
         {
             while (programBezi)
@@ -28,7 +29,7 @@ namespace BANKA
         {
             Console.Clear();
             Console.WriteLine("=====================================");
-            Console.WriteLine("        Vitajte v R&D Bank");
+            Console.WriteLine("         VITAJTE V R&D BANKE          ");
             Console.WriteLine("=====================================");
             Console.WriteLine("1. Prihlasenie");
             Console.WriteLine("2. Zalozenie noveho uctu");
@@ -37,7 +38,7 @@ namespace BANKA
             Console.WriteLine("5. Ukoncit program");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Zvolte moznost: ");
-
+            
             switch (Console.ReadLine())
             {
                 case "1":
@@ -56,7 +57,7 @@ namespace BANKA
                     programBezi = false;
                     break;
                 default:
-                    ChybaVolby();
+                    Chyba();
                     break;
             }
         }
@@ -66,7 +67,7 @@ namespace BANKA
             Console.Clear();
             Console.WriteLine("--- Prihlasenie ---");
 
-            Console.Write("Zadajte ID uctu: ");
+            Console.WriteLine("Zadajte ID uctu: ");
             if (!int.TryParse(Console.ReadLine(), out int id))
             {
                 Chyba("Neplatny format ID.");
@@ -76,7 +77,7 @@ namespace BANKA
             Console.WriteLine("Zadajte heslo: ");
             string heslo = Console.ReadLine();
 
-            Account ucet = zoznamUctov.FirstOrDefault(u => u.ID == id);
+            Account ucet = zoznamUctov.FirstOrDefault(u => u.ID == id); //POMOC CHAT GPT-(FirstOrDefault) PREJDE ZOZNAM VSETKYCH UCOTV A VRATI TIE KTORE PLNIA PODMIENKU AK NIE VRATI NULL 
 
             if (ucet != null && ucet.Heslo == heslo)
             {
@@ -88,33 +89,94 @@ namespace BANKA
                 Console.WriteLine("Chybne ID alebo heslo.");
             }
 
-            CakajNaEnter();
+            StlacteEnter();
         }
 
         static void ZalozenieUctu()
         {
             Console.Clear();
-            Console.WriteLine("--- Zalozenie Uctu ---");
+            Console.WriteLine("--- Zalozenie Noveho Uctu ---");
 
-            Console.WriteLine("Meno a priezvisko: ");
+            Console.WriteLine("Zadajte Vase meno a priezvisko: ");
             string meno = Console.ReadLine();
-
-            Console.Write("Heslo: ");
+            Console.WriteLine("Heslo: ");
             string heslo = Console.ReadLine();
 
+            bool Spravnemeno = true;
+            foreach (char znak in meno)
+            {
+                if (!char.IsLetter(znak) && znak != ' ')
+                {
+                    Spravnemeno = false;
+                    break;
+                }
+            }
+
+            if (!Spravnemeno || meno.Length == 0)
+            {
+                Console.WriteLine("Chyba! Meno nesmie obsahovat cisla.");
+                Console.ReadLine();
+                return;
+            }
             Console.WriteLine("Pociatocny vklad (min. 10 EUR): ");
             if (!decimal.TryParse(Console.ReadLine(), out decimal vklad) || vklad < 10)
             {
-                Chyba("Minimalny vklad je 10 EUR.");
+                Console.WriteLine("Neplatny vklad. Musi byt aspon 10 EUR.");
+                Console.WriteLine("Stlacte Enter pre navrat do menu.");
+                Console.ReadLine();
                 return;
             }
 
-            Account ucet = new Account(noveID++, meno, heslo, vklad);
-            zoznamUctov.Add(ucet);
+           
+            Console.WriteLine("Vyber ID uctu:");
+            Console.WriteLine("1. Chcem si zvolit vlastne ID");
+            Console.WriteLine("2. Chcem automaticky (random) pridelene ID");
+            Console.WriteLine("Zvolte moznost: ");
+            string volbaID = Console.ReadLine();
 
-            Console.WriteLine("Ucet bol uspesne vytvoreny.");
-            Console.WriteLine($"Vase ID: {ucet.ID}");
-            CakajNaEnter();
+            int idUctu;
+
+            if (volbaID == "1")
+            {
+                Console.WriteLine("Zadajte vlastne ID (cislo): ");
+                if (!int.TryParse(Console.ReadLine(), out idUctu))
+                {
+                    Console.WriteLine("Neplatny format ID.");
+                    Console.ReadLine();
+                    return;
+                }
+
+                
+                if (zoznamUctov.Any(u => u.ID == idUctu))
+                {
+                    Console.WriteLine("Toto ID uz existuje.Vyberte ine ID.");
+                    Console.ReadLine();
+                    return;
+                }
+            }
+            else if (volbaID == "2")
+            {
+                idUctu = VygenerujRandomID();
+            }
+            else
+            {
+                Console.WriteLine("Neplatna volba.");
+                Console.ReadLine();
+                return;
+            }
+
+            Account novyUcet = new Account(idUctu, meno, heslo, vklad)
+            {
+                HistoriaPrevodov = new List<string>()
+            }
+            ;
+            zoznamUctov.Add(novyUcet);
+
+            Console.WriteLine($"Ucet bol uspesne zalozeny!");
+            Console.WriteLine($"Vase prihlasovacie ID je: {novyUcet.ID}");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("Stlacte Enter pre pokracovanie...");
+            Console.ReadLine();
         }
 
         static void ObnovenieHesla()
@@ -140,19 +202,19 @@ namespace BANKA
                 Console.WriteLine("Zadajte meno a priezvisko: ");
                 string meno = Console.ReadLine();
 
-                if (meno.Equals(ucet.MenoPriezvisko, StringComparison.OrdinalIgnoreCase))
+                if (meno.Equals(ucet.MenoPriezvisko, StringComparison.OrdinalIgnoreCase)) // PODMIENKA IF SA VYKONA LEN AK SA MENO ZHODUJE S MENOM V UCTE
                 {
                     Console.WriteLine("Zadajte nove heslo: ");
                     ucet.Heslo = Console.ReadLine();
-                    Console.WriteLine("Heslo bolo zmenene.");
+                    Console.WriteLine("Vase heslo bolo uspesne zmenene.");
                 }
                 else
                 {
-                    Console.WriteLine("Meno nesedi.");
+                    Console.WriteLine("Meno sa nezhoduje.");
                 }
             }
 
-            CakajNaEnter();
+            StlacteEnter();
         }
 
         static void ZobrazVsetkyID()
@@ -172,7 +234,7 @@ namespace BANKA
                 }
             }
 
-            CakajNaEnter();
+            StlacteEnter();
         }
 
         static void BankoveMenu()
@@ -208,7 +270,7 @@ namespace BANKA
                     prihlasenyUcet = null;
                     break;
                 default:
-                    ChybaVolby();
+                    Chyba();
                     break;
             }
         }
@@ -227,7 +289,7 @@ namespace BANKA
             {
                 Console.WriteLine("Neplatna suma.");
             }
-            CakajNaEnter();
+            StlacteEnter();
         }
 
         static void Vyber()
@@ -244,7 +306,7 @@ namespace BANKA
             {
                 Console.WriteLine("Nedostatocny zostatok alebo neplatna suma.");
             }
-            CakajNaEnter
+            StlacteEnter
                 ();
         }
 
@@ -253,18 +315,18 @@ namespace BANKA
             Console.Clear();
             Console.WriteLine("--- Prevod na iny ucet ---");
 
-            Console.Write("Zadajte ID prijemcu: ");
+            Console.WriteLine("Zadajte ID prijemcu: ");
             if (!int.TryParse(Console.ReadLine(), out int idPrijemcu))
             {
                 Console.WriteLine("Neplatne ID.");
-                CakajNaEnter();
+                StlacteEnter();
                 return;
             }
 
             if (idPrijemcu == prihlasenyUcet.ID)
             {
                 Console.WriteLine("Nemozete poslat peniaze sam sebe.");
-                CakajNaEnter();
+                StlacteEnter();
                 return;
             }
 
@@ -273,22 +335,22 @@ namespace BANKA
             if (prijemca == null)
             {
                 Console.WriteLine("Ucet s danym ID neexistuje.");
-                CakajNaEnter();
+                StlacteEnter();
                 return;
             }
 
-            Console.Write("Zadajte sumu prevodu: ");
+            Console.WriteLine("Zadajte sumu prevodu: ");
             if (!decimal.TryParse(Console.ReadLine(), out decimal suma) || suma <= 0)
             {
                 Console.WriteLine("Neplatna suma.");
-                CakajNaEnter();
+                StlacteEnter();
                 return;
             }
 
             if (prihlasenyUcet.Zostatok < suma)
             {
                 Console.WriteLine("Nedostatocny zostatok na ucte.");
-                CakajNaEnter();
+                StlacteEnter();
                 return;
             }
 
@@ -306,10 +368,10 @@ namespace BANKA
             Console.WriteLine("Prevod bol uspesne vykonany.");
             Console.WriteLine($"Novy zostatok: {prihlasenyUcet.Zostatok:N2} EUR");
 
-            CakajNaEnter();
+            StlacteEnter();
         }
 
-        static void CakajNaEnter()
+        static void StlacteEnter()
         {
             Console.WriteLine("Pokračujte stlačením ENTER...");
             Console.ReadLine();
@@ -332,22 +394,146 @@ namespace BANKA
                 }
             }
 
-            CakajNaEnter();
+            StlacteEnter();
         }
 
-        static void ChybaVolby()
+        static void Chyba()
         {
-            Console.WriteLine("Neplatna volba. Skuste znova.");
-            CakajNaEnter();
+            Console.WriteLine("Neplatna volba. Skuste znova prosim.");
+            StlacteEnter();
         }
 
         static void Chyba(string sprava)
         {
             Console.WriteLine(sprava);
-            CakajNaEnter();
+            StlacteEnter();
         }
-    }
+
+        
+        private static int VygenerujRandomID()
+        {
+            Random random = new Random();
+            int id;
+            do
+            {
+                id = random.Next(1000, 9999); 
+            } while (zoznamUctov.Any(u => u.ID == id)); // METODA ANY SA PYTA CI TAM EXISTUJE ASPON JEDEN UCET
+            return id;
+        } 
+    }  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
