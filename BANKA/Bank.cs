@@ -8,7 +8,7 @@ namespace BANKA
 
 
     public class Bank
-    {
+    { 
         private static List<Account> zoznamUctov = new List<Account>();
         private static Account prihlasenyUcet = null;
         private static int noveID = 999-1500;
@@ -39,6 +39,11 @@ namespace BANKA
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Zvolte moznost: ");
             
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ResetColor();
+
+
             switch (Console.ReadLine())
             {
                 case "1":
@@ -417,7 +422,7 @@ namespace BANKA
             do
             {
                 id = random.Next(1000, 9999); 
-            } while (zoznamUctov.Any(u => u.ID == id)); // METODA ANY SA PYTA CI TAM EXISTUJE ASPON JEDEN UCET
+            }   while (zoznamUctov.Any(u => u.ID == id)); // METODA ANY SA PYTA CI TAM EXISTUJE ASPON JEDEN UCET
             return id;
         } 
     }  
