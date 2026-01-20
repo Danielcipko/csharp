@@ -24,12 +24,11 @@ namespace BANKA
                     BankoveMenu();
             }
         }
-
         static void UvodneMenu()
         {
             Console.Clear();
             Console.WriteLine("=====================================");
-            Console.WriteLine("         VITAJTE V R&D BANKE          ");
+            Console.WriteLine("         VITAJTE V R&D BANKE         ");
             Console.WriteLine("=====================================");
             Console.WriteLine("1. Prihlasenie");
             Console.WriteLine("2. Zalozenie noveho uctu");
@@ -37,11 +36,8 @@ namespace BANKA
             Console.WriteLine("4. Zobrazit zoznam ID");
             Console.WriteLine("5. Ukoncit program");
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("Zvolte moznost: ");
+            Console.WriteLine("Zvolte moznost:");
             
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ResetColor();
 
 
             switch (Console.ReadLine())
@@ -82,7 +78,7 @@ namespace BANKA
             Console.WriteLine("Zadajte heslo: ");
             string heslo = Console.ReadLine();
 
-            Account ucet = zoznamUctov.FirstOrDefault(u => u.ID == id); //POMOC CHAT GPT-(FirstOrDefault) PREJDE ZOZNAM VSETKYCH UCOTV A VRATI TIE KTORE PLNIA PODMIENKU AK NIE VRATI NULL 
+            Account ucet = zoznamUctov.FirstOrDefault(u => u.ID == id); //POMOC CHAT GPT-(FirstOrDefault) PREJDE ZOZNAM UCOTV A VRATI UCET S ROVNAKYM ID AK NIE, VRATI NULL 
 
             if (ucet != null && ucet.Heslo == heslo)
             {
@@ -190,7 +186,7 @@ namespace BANKA
             Console.WriteLine("--- Obnovenie Hesla ---");
 
             Console.WriteLine("Zadajte ID uctu: ");
-            if (!int.TryParse(Console.ReadLine(), out int id))
+            if (!int.TryParse(Console.ReadLine(), out int id)) // METODA TRYPARSE SA POKUSI PREMENIT VSTUP NA INTEGER, AK SA TO PODARI, VRATI TRUE A HODNOTU PRIRADI DO PREMENNEJ ID
             {
                 Chyba("Neplatne ID.");
                 return;
@@ -363,7 +359,7 @@ namespace BANKA
             prihlasenyUcet.Zostatok -= suma;
             prijemca.Zostatok += suma;
 
-            // HISTORIA
+            // HISTORIA PREVODOV
             prihlasenyUcet.HistoriaPrevodov.Add(
                 $"Prevod -> ID {prijemca.ID}: -{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})");
 
