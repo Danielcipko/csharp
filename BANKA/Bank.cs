@@ -83,7 +83,7 @@ namespace BANKA
             if (ucet != null && ucet.Heslo == heslo)
             {
                 prihlasenyUcet = ucet;
-                Console.WriteLine($"Prihlasenie uspesne. Vitajte, {ucet.MenoPriezvisko}.");
+                Console.WriteLine($"Prihlasenie uspesne. Vitajte, {ucet.MenoPriezvisko}."); 
             }
             else
             {
@@ -283,7 +283,7 @@ namespace BANKA
             if (decimal.TryParse(Console.ReadLine(), out decimal suma) && suma > 0)
             {
                 prihlasenyUcet.Zostatok += suma;
-                prihlasenyUcet.HistoriaPrevodov.Add($"+{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})");
+                prihlasenyUcet.HistoriaPrevodov.Add($"+{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})"); // REALNY CAS POMOC CHAT GPT
                 Console.WriteLine("Vklad uspesny.");
             }
             else
@@ -300,15 +300,14 @@ namespace BANKA
             if (decimal.TryParse(Console.ReadLine(), out decimal suma) && suma > 0 && suma <= prihlasenyUcet.Zostatok)
             {
                 prihlasenyUcet.Zostatok -= suma;
-                prihlasenyUcet.HistoriaPrevodov.Add($"-{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})");
+                prihlasenyUcet.HistoriaPrevodov.Add($"-{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})"); 
                 Console.WriteLine("Vyber uspesny.");
             }
             else
             {
                 Console.WriteLine("Nedostatocny zostatok alebo neplatna suma.");
             }
-            StlacteEnter
-                ();
+            StlacteEnter();
         }
 
         static void Prevod()
@@ -361,10 +360,10 @@ namespace BANKA
 
             // HISTORIA PREVODOV
             prihlasenyUcet.HistoriaPrevodov.Add(
-                $"Prevod -> ID {prijemca.ID}: -{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})");
+                $"Prevod -> ID {prijemca.ID}: -{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})"); 
 
             prijemca.HistoriaPrevodov.Add(
-                $"Prevod <- ID {prihlasenyUcet.ID}: +{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})");
+                $"Prevod <- ID {prihlasenyUcet.ID}: +{suma:N2} EUR ({DateTime.Now:dd.MM.yyyy HH:mm})"); 
 
             Console.WriteLine("Prevod bol uspesne vykonany.");
             Console.WriteLine($"Novy zostatok: {prihlasenyUcet.Zostatok:N2} EUR");
