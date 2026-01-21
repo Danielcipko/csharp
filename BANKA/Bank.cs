@@ -28,7 +28,7 @@ namespace BANKA
         {
             Console.Clear();
             Console.WriteLine("=====================================");
-            Console.WriteLine("         VITAJTE V R&D BANKE         ");
+            Console.WriteLine("        VITAJTE V R&D BANKE          ");
             Console.WriteLine("=====================================");
             Console.WriteLine("1. Prihlasenie");
             Console.WriteLine("2. Zalozenie noveho uctu");
@@ -173,7 +173,7 @@ namespace BANKA
             ;
             zoznamUctov.Add(novyUcet);
 
-            Console.WriteLine($"Ucet bol uspesne zalozeny!");
+            Console.WriteLine("Ucet bol uspesne zalozeny!");
             Console.WriteLine($"Vase prihlasovacie ID je: {novyUcet.ID}");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Stlacte Enter pre pokracovanie...");
@@ -186,7 +186,7 @@ namespace BANKA
             Console.WriteLine("--- Obnovenie Hesla ---");
 
             Console.WriteLine("Zadajte ID uctu: ");
-            if (!int.TryParse(Console.ReadLine(), out int id)) // METODA TRYPARSE SA POKUSI PREMENIT VSTUP NA INTEGER, AK SA TO PODARI, VRATI TRUE A HODNOTU PRIRADI DO PREMENNEJ ID
+            if (!int.TryParse(Console.ReadLine(), out int id)) // METODA (TrypParse) SA POKUSI PREMENIT VSTUP NA INTEGER, AK SA TO PODARI, VRATI TRUE A HODNOTU PRIRADI DO PREMENNEJ ID
             {
                 Chyba("Neplatne ID.");
                 return;
@@ -418,7 +418,7 @@ namespace BANKA
             do
             {
                 id = random.Next(1000, 9999); 
-            }   while (zoznamUctov.Any(u => u.ID == id)); // METODA ANY SA PYTA CI TAM EXISTUJE ASPON JEDEN UCET
+            }   while (zoznamUctov.Any(u => u.ID == id)); // METODA ANY SA PYTA CI TAM EXISTUJE ASPON JEDEN UCET KTORY SPLNA PODMIENKU
             return id;
         } 
     }  
