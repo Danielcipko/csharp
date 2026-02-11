@@ -38,7 +38,7 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (koniecHry) return;
+             if (koniecHry) return;
             string text = Zadanie.Text;
             int zadaneCislo = int.Parse(text);
             int aktualnavzdialenost = Math.Abs(cislo - zadaneCislo);
