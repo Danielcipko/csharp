@@ -1,0 +1,44 @@
+﻿<Window x:Class="cvicenie_MinecraftDressup.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cvicenie_MinecraftDressup"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="800">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF4E0FC9" Offset="0.201"/>
+                <GradientStop Color="#FFA300A4" Offset="0.896"/>
+                <GradientStop Color="#FF840F86" Offset="0.993"/>
+                <GradientStop Color="#FFBB1FBD" Offset="1"/>
+                <GradientStop Color="#FF960998" Offset="0.601"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ComboBox Name="Combox_HelmPicker" HorizontalAlignment="Left" Margin="104,65,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combox_HelmPicker_SelectionChanged">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="1"/>
+                    <GradientStop Color="#FF181719"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Label Name="Label_ActualArmor" Content="Label" HorizontalAlignment="Left" Margin="108,189,0,0" VerticalAlignment="Top" Height="26" Width="112" Foreground="White" FontFamily="Copperplate Gothic Bold">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8300D1" Offset="0.024"/>
+                    <GradientStop Color="#FF05969B" Offset="0.896"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Image Name="Image_HelmetPlaceHolder" HorizontalAlignment="Left" Height="90" Margin="600,76,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.554,0.098"/>
+        <ComboBox Name="Combox_BodyPicker" HorizontalAlignment="Left" Margin="104,323,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combox_BodyPlaceHolder_SelectionChanged"/>
+        <Image Name="Image_BodyPlaceHolder" HorizontalAlignment="Left" Height="100" Margin="600,287,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.522,0.658"/>
+        <ComboBox Name="Combox_PantsPicker" HorizontalAlignment="Left" Margin="104,509,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combox_PantsPicker_SelectionChanged"/>
+        <Image Name="Image_PantsPlaceHolder" HorizontalAlignment="Left" Height="100" Margin="600,509,0,0" VerticalAlignment="Top" Width="100"/>
+        <ComboBox Name="Combox_LegPicker" HorizontalAlignment="Left" Margin="104,696,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combox_LegPicker_SelectionChanged"/>
+        <Image Name="Image_LegPlaceHolder" HorizontalAlignment="Left" Height="100" Margin="600,640,0,0" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</Window>
