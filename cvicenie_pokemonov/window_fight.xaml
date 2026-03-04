@@ -1,0 +1,22 @@
+﻿<Window x:Class="Cvicenie_Pokemon.Window_Fight"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cvicenie_Pokemon"
+        mc:Ignorable="d"
+        Title="Window_Fight" Height="450" Width="800">
+    <Grid>
+
+        <Image Margin="10,0,400,193" Source="/Images/Pikachu.png" Stretch="Fill"/>
+        <Image Margin="463,5,50,198" Source="/Images/Charizard.png" Stretch="Fill"/>
+        <ProgressBar Name="ProgressBar_Hero" HorizontalAlignment="Left" Height="35" Margin="72,281,0,0" VerticalAlignment="Top" Width="266" ValueChanged="ProgressBar_Hero_ValueChanged" Maximum="200" />
+        <ProgressBar Name="ProgressBar_Enemy" HorizontalAlignment="Left" Height="35" Margin="473,281,0,0" VerticalAlignment="Top" Width="267"/>
+        <Button Content="Light Attack" HorizontalAlignment="Left" Margin="28,352,0,0" VerticalAlignment="Top" Height="38" Width="120" Click="Button_Click"/>
+        <Button Content="Hight Attack" HorizontalAlignment="Left" Margin="329,352,0,0" VerticalAlignment="Top" Height="38" Width="120" Click="Button_Click_2" />
+        <Button Content="Medium Attack" HorizontalAlignment="Left" Margin="178,352,0,0" VerticalAlignment="Top" Height="38" Width="120" Click="Button_Click_1" />
+        <Label Name="Label_GameStatus" Content="Winner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="359,204,0,0" Height="44" FontSize="25"/>
+
+
+    </Grid>
+</Window>
