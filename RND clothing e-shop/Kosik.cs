@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RND_clothing_e_shop
 {
-    internal class Kosik
+    public class Kosik
     {
+
     }
 }

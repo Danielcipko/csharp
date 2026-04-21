@@ -140,7 +140,7 @@
 
                     <!-- PRODUCTS -->
                     <ScrollViewer Grid.Row="1">
-                        <WrapPanel>
+                        <WrapPanel x:Name="ProductsPanel" Margin="20">
 
                             <!-- PRODUCT -->
                             <Border Width="220"
