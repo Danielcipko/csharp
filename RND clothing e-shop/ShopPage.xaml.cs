@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RND_clothing_e_shop
 {
@@ -23,15 +26,14 @@ namespace RND_clothing_e_shop
         {
             VsetkyProdukty = new List<Produkt>
             {
-                new Produkt { Name = "Biele Tričko", Price = 19.99m, Category = "Tričká" },
-                new Produkt { Name = "Čierna Mikina", Price = 39.99m, Category = "Mikiny" },
-                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice" },
-                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy" },
-                new Produkt { Name = "Tenisky", Price = 59.99m, Category = "Topánky" },
-                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky" }
+                new Produkt { Name = "Biele Tričko", Price = 19.99m, Category = "Tričká", ImagePath = "/Images/biele tricko predok.jpg"},
+                new Produkt { Name = "Čierna Mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "/Images/sweater front.jpg"},
+                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "/Images/rifle pred.jpg"},
+                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy"},
+                new Produkt { Name = "Tenisky", Price = 59.99m, Category = "Topánky"},
+                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky"}
             };
         }
-
         private void ZobrazProdukty(string kategoria)
         {
             ProductsPanel.Children.Clear();
@@ -95,6 +97,16 @@ namespace RND_clothing_e_shop
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
             new KosikWindow().Show();
+            this.Close();
+        }
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            JsonServis.DeleteUsers();
+            JsonServis.DeleteKosik();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+
             this.Close();
         }
 

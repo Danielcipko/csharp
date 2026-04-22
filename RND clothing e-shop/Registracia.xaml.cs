@@ -23,7 +23,9 @@ namespace RND_clothing_e_shop
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+
         }
+        private AuthServis authServis = new AuthServis();
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             BackgroundVideo.Source = new Uri("Videos/wpf projekt rnd.mp4", UriKind.Relative);
@@ -40,6 +42,23 @@ namespace RND_clothing_e_shop
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            string username = MenoTextBox.Text;
+            string email = EmailTextBox.Text;
+            string password = HesloPasswordBox.Password;
+            string provePassword = PotvrdHesloPasswordBox.Password;
+
+            bool uspech = authServis.Register(username, email, password, provePassword);
+
+            MessageBox.Show(authServis.Message);
+
+            if (uspech)
+            {
+                Prihlasenie prihlasenie = new Prihlasenie();
+                prihlasenie.Show();
+
+                this.Close();
+
+            }
 
         }
         private void BackToLogin_Click(object sender, RoutedEventArgs e)

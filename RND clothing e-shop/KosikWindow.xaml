@@ -349,8 +349,9 @@
                                    Foreground="White"
                                    FontSize="24"
                                    FontWeight="Bold"/>
-                        <TextBlock Grid.Column="1"
-                                   Text="84,97 €"
+                        <TextBlock x:Name="TotalPriceTxt"
+                                   Grid.Column="1"
+                                   Text="0.00 €"
                                    Foreground="White"
                                    FontSize="24"
                                    FontWeight="Bold"/>
@@ -375,14 +376,5 @@
                 </StackPanel>
             </Border>
         </Grid>
-
-        <TextBlock x:Name="TotalPriceTxt"
-                   FontSize="20"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   Margin="10"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Text="0.00 €"/>
     </Grid>
 </Window>

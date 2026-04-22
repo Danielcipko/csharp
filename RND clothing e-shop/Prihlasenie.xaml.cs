@@ -24,6 +24,7 @@ namespace RND_clothing_e_shop
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
+        private AuthServis authServis = new AuthServis();
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             BackgroundVideo.Source = new Uri("Videos/wpf projekt rnd.mp4", UriKind.Relative);
@@ -40,7 +41,20 @@ namespace RND_clothing_e_shop
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            string nameOrEmail = MenoTextBox.Text;
+            string password = HesloPasswordBox.Password;
 
+            bool uspech = authServis.Login(nameOrEmail, password);
+
+            MessageBox.Show(authServis.Message);
+
+            if (uspech)
+            {
+                ShopPage shopPage = new ShopPage();
+                shopPage.Show();
+
+                this.Close();
+            }
         }
         private void GoToRegister_Click(object sender, RoutedEventArgs e)
         {
