@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\biele tricko predok.jpg" />
+    <None Remove="Images\bunda predok.jpg" />
+    <None Remove="Images\cierne tricko predok.jpg" />
+    <None Remove="Images\rifle pred.jpg" />
+    <None Remove="Images\satka 2.webp" />
+    <None Remove="Images\sweater front.jpg" />
+    <None Remove="Images\tenisky.jpg" />
     <None Remove="Videos\wpf projekt rnd.mp4" />
   </ItemGroup>
 
@@ -17,6 +24,16 @@
     <Content Include="Videos\wpf projekt rnd.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\biele tricko predok.jpg" />
+    <Resource Include="Images\bunda predok.jpg" />
+    <Resource Include="Images\cierne tricko predok.jpg" />
+    <Resource Include="Images\rifle pred.jpg" />
+    <Resource Include="Images\satka 2.webp" />
+    <Resource Include="Images\sweater front.jpg" />
+    <Resource Include="Images\tenisky.jpg" />
   </ItemGroup>
 
 </Project>

@@ -123,12 +123,12 @@ namespace RND_clothing_e_shop
             this.Close();
         }
 
-        // 1. Zníženie množstva
+       
         private void MinusButton_Click(object sender, RoutedEventArgs e)
         {
-            // Zistíme, na ktoré tlačidlo sa kliklo
+            
             var tlacidlo = sender as Button;
-            // Získame dáta produktu priradeného k tomuto riadku
+            
             var polozka = tlacidlo?.DataContext as dynamic;
 
             if (polozka != null)
@@ -136,18 +136,17 @@ namespace RND_clothing_e_shop
                 if (polozka.Quantity > 1)
                 {
                     polozka.Quantity--;
-                    // Ak máš metódu na prepočet celkovej ceny, zavolaj ju tu:
-                    // PrepocitajCelkovuCenu();
+                    
                 }
                 else
                 {
-                    // Ak je množstvo 1 a klikneš na mínus, položku odstránime
+                    
                     RemoveItem_Click(sender, e);
                 }
             }
         }
 
-        // 2. Zvýšenie množstva
+        
         private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
             var tlacidlo = sender as Button;
@@ -156,11 +155,11 @@ namespace RND_clothing_e_shop
             if (polozka != null)
             {
                 polozka.Quantity++;
-                // PrepocitajCelkovuCenu();
+              
             }
         }
 
-        // 3. Odstránenie položky
+        
         private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             var tlacidlo = sender as Button;

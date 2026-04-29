@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Media.Imaging;
+using System.Windows.Input;
 
 namespace RND_clothing_e_shop
 {
@@ -26,19 +25,20 @@ namespace RND_clothing_e_shop
         {
             VsetkyProdukty = new List<Produkt>
             {
-                new Produkt { Name = "Biele Tričko", Price = 19.99m, Category = "Tričká", ImagePath = "/Images/biele tricko predok.jpg"},
-                new Produkt { Name = "Čierna Mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "/Images/sweater front.jpg"},
-                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "/Images/rifle pred.jpg"},
-                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy"},
-                new Produkt { Name = "Tenisky", Price = 59.99m, Category = "Topánky"},
-                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky"}
+                new Produkt { Name = "Biele Tričko", Price = 19.99m, Category = "Tričká", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\biele tricko predok.jpg" },
+                new Produkt { Name = "Čierna Mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\sweater front.jpg"},
+                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\rifle pred.jpg"},
+                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\bunda predok.jpg"},
+                new Produkt { Name = "Tenisky", Price = 59.99m, Category = "Topánky", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\tenisky.jpg"},
+                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\satka 2.webp"}
             };
         }
+
         private void ZobrazProdukty(string kategoria)
         {
             ProductsPanel.Children.Clear();
 
-            var filtrovane = kategoria == "Všetko"
+            List<Produkt> filtrovane = kategoria == "Všetko"
                 ? VsetkyProdukty
                 : VsetkyProdukty.Where(p => p.Category == kategoria).ToList();
 
@@ -47,7 +47,7 @@ namespace RND_clothing_e_shop
                 Border card = new Border
                 {
                     Width = 220,
-                    Height = 280,
+                    Height = 320,
                     Background = (Brush)new BrushConverter().ConvertFromString("#FF2A2A2A"),
                     CornerRadius = new CornerRadius(15),
                     Margin = new Thickness(10),
@@ -56,15 +56,67 @@ namespace RND_clothing_e_shop
 
                 StackPanel stack = new StackPanel();
 
-                Border img = new Border { Height = 120, Background = (Brush)new BrushConverter().ConvertFromString("#FF3A3A3A"), CornerRadius = new CornerRadius(10), Margin = new Thickness(0, 0, 0, 10) };
+                Border imageContainer = new Border
+                {
+                    Height = 120,
+                    Background = (Brush)new BrushConverter().ConvertFromString("#FF3A3A3A"),
+                    CornerRadius = new CornerRadius(10),
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
 
-                TextBlock nameTxt = new TextBlock { Text = prod.Name, Foreground = Brushes.White, FontSize = 18, FontWeight = FontWeights.SemiBold };
-                TextBlock priceTxt = new TextBlock { Text = $"{prod.Price} €", Foreground = Brushes.Gray, Margin = new Thickness(0, 5, 0, 10) };
+                Image img = new Image
+                {
+                    Height = 110,
+                    Stretch = Stretch.Uniform
+                };
 
-                Button addBtn = new Button { Content = "Pridať do košíka", Height = 40, Style = (Style)FindResource("RoundedButtonStyle"), Background = Brushes.White, Foreground = Brushes.Black };
-                addBtn.Click += (s, e) => AddToCart(prod.Name, prod.Price);
+                if (!string.IsNullOrEmpty(prod.ImagePath))
+                {
+                    try
+                    {
+                        BitmapImage bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.UriSource = new Uri(prod.ImagePath, UriKind.RelativeOrAbsolute);
+                        bi.CacheOption = BitmapCacheOption.OnLoad;
+                        bi.EndInit();
+                        img.Source = bi;
+                    }
+                    catch { }
+                }
 
-                stack.Children.Add(img);
+                imageContainer.Child = img;
+
+                TextBlock nameTxt = new TextBlock
+                {
+                    Text = prod.Name,
+                    Foreground = Brushes.White,
+                    FontSize = 18,
+                    FontWeight = FontWeights.SemiBold,
+                    TextAlignment = TextAlignment.Center
+                };
+
+                TextBlock priceTxt = new TextBlock
+                {
+                    Text = $"{prod.Price:N2} €",
+                    Foreground = Brushes.Gray,
+                    Margin = new Thickness(0, 5, 0, 10),
+                    TextAlignment = TextAlignment.Center
+                };
+
+                Button addBtn = new Button
+                {
+                    Content = "Pridať do košíka",
+                    Height = 40,
+                    Style = (Style)FindResource("RoundedButtonStyle"),
+                    Background = Brushes.White,
+                    Foreground = Brushes.Black,
+                    Cursor = Cursors.Hand
+                };
+
+               
+                addBtn.Click += (s, e) => AddToCart(prod.Name, prod.Price, prod.ImagePath);
+
+                stack.Children.Add(imageContainer);
                 stack.Children.Add(nameTxt);
                 stack.Children.Add(priceTxt);
                 stack.Children.Add(addBtn);
@@ -74,7 +126,7 @@ namespace RND_clothing_e_shop
             }
         }
 
-        private void AddToCart(string name, decimal price)
+        private void AddToCart(string name, decimal price, string imagePath)
         {
             var polozka = KosikList.FirstOrDefault(p => p.Name == name);
             if (polozka != null)
@@ -83,7 +135,8 @@ namespace RND_clothing_e_shop
             }
             else
             {
-                KosikList.Add(new Produkt { Name = name, Price = price, Quantity = 1 });
+               
+                KosikList.Add(new Produkt { Name = name, Price = price, Quantity = 1, ImagePath = imagePath });
             }
             MessageBox.Show($"{name} bol pridaný do košíka.");
         }
@@ -99,17 +152,16 @@ namespace RND_clothing_e_shop
             new KosikWindow().Show();
             this.Close();
         }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             JsonServis.DeleteUsers();
             JsonServis.DeleteKosik();
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-
+            new MainWindow().Show();
             this.Close();
         }
 
+        // Kategórie
         private void AllCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Všetko");
         private void TrickaCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Tričká");
         private void MikinyCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Mikiny");
@@ -118,9 +170,17 @@ namespace RND_clothing_e_shop
         private void TopankyCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Topánky");
         private void DoplnkyCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Doplnky");
 
-        private void AddWhiteShirt_Click(object sender, RoutedEventArgs e) => AddToCart("Biele Tričko", 19.99m);
-        private void AddBlackHoodie_Click(object sender, RoutedEventArgs e) => AddToCart("Čierna Mikina", 39.99m);
-        private void AddJeans_Click(object sender, RoutedEventArgs e) => AddToCart("Rifle", 49.99m);
-        private void AddJacket_Click(object sender, RoutedEventArgs e) => AddToCart("Bunda", 89.99m);
+       
+        private void AddWhiteShirt_Click(object sender, RoutedEventArgs e)
+            => AddToCart("Biele Tričko", 19.99m, "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\biele tricko predok.jpg");
+
+        private void AddBlackHoodie_Click(object sender, RoutedEventArgs e)
+            => AddToCart("Čierna Mikina", 39.99m, "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\sweater front.jpg");
+
+        private void AddJeans_Click(object sender, RoutedEventArgs e)
+            => AddToCart("Rifle", 49.99m, "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\rifle pred.jpg");
+
+        private void AddJacket_Click(object sender, RoutedEventArgs e)
+            => AddToCart("Bunda", 89.99m, "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\bunda predok.jpg");
     }
 }
