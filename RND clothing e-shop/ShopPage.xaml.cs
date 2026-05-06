@@ -25,12 +25,37 @@ namespace RND_clothing_e_shop
         {
             VsetkyProdukty = new List<Produkt>
             {
-                new Produkt { Name = "Biele Tričko", Price = 19.99m, Category = "Tričká", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\biele tricko predok.jpg" },
-                new Produkt { Name = "Čierna Mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\sweater front.jpg"},
-                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\rifle pred.jpg"},
-                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\bunda predok.jpg"},
-                new Produkt { Name = "Tenisky", Price = 59.99m, Category = "Topánky", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\tenisky.jpg"},
-                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky", ImagePath = "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\satka 2.webp"}
+                new Produkt { Name = "Biele tričko", Price = 19.99m, Category = "Tričká", ImagePath = "Images/tricko predok.jpeg" },
+                new Produkt { Name = "Čierna mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "Images/mikina pred.jpeg"},
+                new Produkt { Name = "Rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "Images/rifle predok.jpeg"},
+                new Produkt { Name = "Bunda", Price = 89.99m, Category = "Bundy", ImagePath = "Images/bunda predok - Copy.jpg"},
+                new Produkt { Name = "Čierné tenisky", Price = 59.99m, Category = "Topánky", ImagePath = "Images/tenisky.jpg"},
+                new Produkt { Name = "Hodvábna šatka", Price = 12.50m, Category = "Doplnky", ImagePath = "Images/satka 2 - Copy.webp"},
+                new Produkt { Name = "Béžové tričko s potlačou", Price = 23.99m, Category = "Tričká", ImagePath = "Images/bezove tricko s potlacou predok.jpg"},
+                new Produkt { Name = "Čierne tričko", Price = 19.99m, Category = "Tričká", ImagePath = "Images/cierne tricko predok - Copy.jpg"},
+                new Produkt { Name = "Čierne tričko s potlačou", Price = 23.99m, Category = "Tričká", ImagePath = "Images/cierne tricko s potlacou predok.jpg"},
+                new Produkt { Name = "Rúžové tričko s potlačou", Price = 23.99m, Category = "Tričká", ImagePath = "Images/ruzove tricko s potalcou predok.jpg"},
+                new Produkt { Name = "Fialová mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "Images/fialova mikina predok.jpg"},
+                new Produkt { Name = "Modrá mikina", Price = 40.99m, Category = "Mikiny", ImagePath = "Images/modra mikca 1.webp"},
+                new Produkt { Name = "Post Malone mikina", Price = 42.99m, Category = "Mikiny", ImagePath = "Images/post malone mikina predok - Copy.jpg"},
+                new Produkt { Name = "Rúžová mikina", Price = 23.99m, Category = "Mikiny", ImagePath = "Images/ruzova mikina.jpg"},
+                new Produkt { Name = "Sivá mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "Images/siva mikca 4.webp"},
+                new Produkt { Name = " Čierne streetwear tenisky", Price = 45.99m, Category = "Topánky", ImagePath = "Images/cierne street wear tenisky.webp"},
+                new Produkt { Name = "Čierne elegantné topánky", Price = 69.99m, Category = "Topánky", ImagePath = "Images/cierne topanky elegantne.webp"},
+                new Produkt { Name = "Sive skater tenisky", Price = 49.99m, Category = "Topánky", ImagePath = "Images/sive skater tenisky.webp"},
+                new Produkt { Name = "Bielé tenisky", Price = 59.99m, Category = "Topánky", ImagePath = "Images/tenisky biele.webp"},
+                new Produkt { Name = "Bielé tričko", Price = 29.99m, Category = "Tričká", ImagePath = "Images/biele triko potlac.jpg"},
+                new Produkt { Name = "Čierne tričko", Price = 29.99m, Category = "Tričká", ImagePath = "Images/cierne tricko s potlacou 2 predok.jpg"},
+                new Produkt { Name = "Šedé tričko", Price = 29.99m, Category = "Tričká", ImagePath = "Images/sede triko 3.webp"},
+                new Produkt { Name = "Modrožltá mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "Images/modrozlta mikina potlac.jpg"},
+                new Produkt { Name = "Sivá mikina", Price = 39.99m, Category = "Mikiny", ImagePath = "Images/siva mikca 1.webp"},
+                new Produkt { Name = "Flared rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "Images/flared jeans 1.jpg"},
+                new Produkt { Name = "Flared rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "Images/flared jeans 2.jpg"},
+                new Produkt { Name = "Flared rifle", Price = 49.99m, Category = "Nohavice", ImagePath = "Images/flared jeans 3.jpg"},
+                new Produkt { Name = "Wide leg rifle", Price = 39.99m, Category = "Nohavice", ImagePath = "Images/baggy jeans 4.jpg"},
+                new Produkt { Name = "Regular fit rifle", Price = 39.99m, Category = "Nohavice", ImagePath = "Images/baggy jeans 5.jpg"},
+                new Produkt { Name = "Straight fit rifle", Price = 39.99m, Category = "Nohavice", ImagePath = "Images/baggy jeans 6.jpg"},
+                new Produkt { Name = "Baggy rifle", Price = 39.99m, Category = "Nohavice", ImagePath = "Images/baggy jeans 7.jpg"},
             };
         }
 
@@ -38,9 +63,15 @@ namespace RND_clothing_e_shop
         {
             ProductsPanel.Children.Clear();
 
-            List<Produkt> filtrovane = kategoria == "Všetko"
-                ? VsetkyProdukty
-                : VsetkyProdukty.Where(p => p.Category == kategoria).ToList();
+            List<Produkt> filtrovane;
+            if (kategoria == "Všetko")
+            {
+                filtrovane = VsetkyProdukty;
+            }
+            else
+            {
+                filtrovane = VsetkyProdukty.Where(p => p.Category == kategoria).ToList();
+            }
 
             foreach (var prod in filtrovane)
             {
@@ -51,7 +82,8 @@ namespace RND_clothing_e_shop
                     Background = (Brush)new BrushConverter().ConvertFromString("#FF2A2A2A"),
                     CornerRadius = new CornerRadius(15),
                     Margin = new Thickness(10),
-                    Padding = new Thickness(10)
+                    Padding = new Thickness(10),
+                    Cursor = Cursors.Hand
                 };
 
                 StackPanel stack = new StackPanel();
@@ -59,15 +91,17 @@ namespace RND_clothing_e_shop
                 Border imageContainer = new Border
                 {
                     Height = 120,
-                    Background = (Brush)new BrushConverter().ConvertFromString("#FF3A3A3A"),
+                    Background = Brushes.White,
                     CornerRadius = new CornerRadius(10),
-                    Margin = new Thickness(0, 0, 0, 10)
+                    Margin = new Thickness(0, 0, 0, 10),
+                    Cursor = Cursors.Hand
                 };
 
                 Image img = new Image
                 {
                     Height = 110,
-                    Stretch = Stretch.Uniform
+                    Stretch = Stretch.Uniform,
+                    Cursor = Cursors.Hand
                 };
 
                 if (!string.IsNullOrEmpty(prod.ImagePath))
@@ -113,8 +147,15 @@ namespace RND_clothing_e_shop
                     Cursor = Cursors.Hand
                 };
 
-               
                 addBtn.Click += (s, e) => AddToCart(prod.Name, prod.Price, prod.ImagePath);
+
+
+                imageContainer.MouseLeftButtonDown += (s, e) =>
+                {
+                    new DetailProduktu(prod).Show();
+                    this.Close();
+                };
+
 
                 stack.Children.Add(imageContainer);
                 stack.Children.Add(nameTxt);
@@ -135,7 +176,7 @@ namespace RND_clothing_e_shop
             }
             else
             {
-               
+
                 KosikList.Add(new Produkt { Name = name, Price = price, Quantity = 1, ImagePath = imagePath });
             }
             MessageBox.Show($"{name} bol pridaný do košíka.");
@@ -170,7 +211,7 @@ namespace RND_clothing_e_shop
         private void TopankyCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Topánky");
         private void DoplnkyCategory_Click(object sender, RoutedEventArgs e) => ZobrazProdukty("Doplnky");
 
-       
+
         private void AddWhiteShirt_Click(object sender, RoutedEventArgs e)
             => AddToCart("Biele Tričko", 19.99m, "C:\\Users\\cipkod25\\source\\repos\\csharp\\obchod eshop\\RND clothing e-shop\\Images\\biele tricko predok.jpg");
 
